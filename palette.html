@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Our Palette - Dough Drop & Co.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background: url("images/transparentbackground.jpg") center/cover no-repeat;
+            min-height: 100vh;
+            color: white;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: -1;
+        }
+
+        /* NAV (kept as you designed) */
+        nav {
+            width: 100%;
+            background-color: sienna;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            height: 80px;
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* PAGE */
+        h1 {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            color: black;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .price {
+            color: green;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        button {
+            margin-top: auto;
+            background: black;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
+        /* MOBILE */
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                padding: 10px 15px;
+            }
+
+            nav ul {
+                gap: 10px;
+                font-size: 0.85rem;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="logo"><strong>Dough Drop & Co.</strong></div>
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="palette.html">Palette</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="basket.html">Your Basket</a></li>
+        </ul>
+    </div>
+</nav>
+
+<h1>Fresh From The Oven</h1>
+
+<div class="grid">
+
+    <div class="card">
+        <img src="images/muffins.jpg" alt="Ragga Muffin">
+        <h3>Ragga Muffin</h3>
+        <p class="price">UGX 5,000</p>
+        <button onclick="addToBasket('Ragga Muffin', 5000, 'images/muffins.jpg')">
+            Add to Basket
+        </button>
+    </div>
+
+    <div class="card">
+        <img src="images/cinnabbuns.jpg" alt="Vanilla Delights">
+        <h3>Vanilla Delights</h3>
+        <p class="price">UGX 7,500</p>
+        <button onclick="addToBasket('Vanilla Delights', 7500, 'images/cinnabbuns.jpg')">
+            Add to Basket
+        </button>
+    </div>
+
+    <div class="card">
+        <img src="images/breadrollspt2.jpg" alt="Buny Bliss">
+        <h3>Buny Bliss</h3>
+        <p class="price">UGX 5,000</p>
+        <button onclick="addToBasket('Buny Bliss', 5000, 'images/breadrollspt2.jpg')">
+            Add to Basket
+        </button>
+    </div>
+
+    <div class="card">
+        <img src="images/pumpkinbread.jpg" alt="Bready Love">
+        <h3>Bready Love</h3>
+        <p class="price">UGX 15,000</p>
+        <button onclick="addToBasket('Bready Love', 15000, 'images/pumpkinbread.jpg')">
+            Add to Basket
+        </button>
+    </div>
+
+    <div class="card">
+        <img src="images/jellyrollpt2.jpg" alt="Copped Out">
+        <h3>Copped Out</h3>
+        <p class="price">UGX 25,000</p>
+        <button onclick="addToBasket('Copped Out', 25000, 'images/jellyrollpt2.jpg')">
+            Add to Basket
+        </button>
+    </div>
+
+    <div class="card">
+        <img src="images/cakework.jpg" alt="Joy Loaf">
+        <h3>Joy Loaf</h3>
+        <p class="price">UGX 35,000</p>
+        <button onclick="addToBasket('Joy Loaf', 35000, 'images/cakework.jpg')">
+            Add to Basket
+        </button>
+    </div>
+
+</div>
+
+<script>
+function addToBasket(name, price, image) {
+    let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+    let existing = basket.find(item => item.name === name);
+
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        basket.push({ name, price, image, qty: 1 });
+    }
+
+    localStorage.setItem("basket", JSON.stringify(basket));
+    alert(name + " added to basket!");
+}
+</script>
+
+</body>
+</html>

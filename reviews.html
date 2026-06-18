@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dough Drop & Co. Reviews</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background: url("images/transparentbackground.jpg") center/cover no-repeat;
+            min-height: 100vh;
+            color: white;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.25);
+            z-index: -1;
+        }
+
+        /* NAV */
+        nav {
+            background: sienna;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* FORM */
+        .form {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: sienna;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #8b4513;
+        }
+
+        /* REVIEWS */
+        .review-card {
+            background: white;
+            color: black;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .name {
+            font-weight: bold;
+        }
+
+        .stars {
+            color: gold;
+            margin: 5px 0;
+        }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    Dough Drop & Co.
+</nav>
+
+<div class="container">
+
+    <h1>Customer Reviews</h1>
+
+    <div class="form">
+
+        <input id="name" placeholder="Your Name">
+
+        <select id="rating">
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="1">★☆☆☆☆</option>
+        </select>
+
+        <textarea id="reviewText" rows="4" placeholder="Write your review..."></textarea>
+
+        <button onclick="saveReview()">Submit Review</button>
+    </div>
+
+    <div id="reviewsContainer"></div>
+</div>
+
+<script>
+function saveReview() {
+    const name = document.getElementById("name").value.trim();
+    const rating = parseInt(document.getElementById("rating").value);
+    const reviewText = document.getElementById("reviewText").value.trim();
+
+    if (!name || !reviewText) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+    reviews.unshift({
+        name,
+        rating,
+        reviewText,
+        createdAt: Date.now()
+    });
+
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+
+    document.getElementById("name").value = "";
+    document.getElementById("reviewText").value = "";
+
+    loadReviews();
+}
+
+function loadReviews() {
+    const container = document.getElementById("reviewsContainer");
+    container.innerHTML = "";
+
+    let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+    reviews.forEach(r => {
+        const fullStars = "★".repeat(r.rating);
+        const emptyStars = "☆".repeat(5 - r.rating);
+
+        container.innerHTML += `
+            <div class="review-card">
+                <div class="name">${r.name}</div>
+                <div class="stars">${fullStars}${emptyStars}</div>
+                <div>${r.reviewText}</div>
+            </div>
+        `;
+    });
+}
+
+loadReviews();
+</script>
+
+</body>
+</html>

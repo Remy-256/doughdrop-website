@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <title>Dough Drop & Co. Homepage</title>
+    <meta name="description" content="The Dough Drop & Co. is confectionary delivery service">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 90px 0 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background: url("images/transparentbackground.jpg") center/cover no-repeat;
+            min-height: 100vh;
+            color: black;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.25);
+            z-index: -1;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* NAVBAR (UNCHANGED STRUCTURE) */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: sienna;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            height: 80px;
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* SLIDER */
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .track {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            flex: 0 0 60%;
+            height: 350px;
+            opacity: 0.4;
+            transform: scale(0.85);
+            transition: 0.4s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        button.prev,
+        button.next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.4);
+            color: white;
+            border: none;
+            font-size: 30px;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        button.prev { left: 10px; }
+        button.next { right: 10px; }
+
+        /* WELCOME */
+        .welcome {
+            width: 100%;
+            margin: 60px 0;
+            padding: 60px 20px;
+            background-color: sienna;
+            text-align: center;
+        }
+
+        .tagline {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .closing {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* ABOUT (UNCHANGED NAME) */
+        .about {
+            width: 100%;
+            margin: 60px 0;
+            padding: 60px 10vw;
+            background-color: #3b1f14;
+            color: white;
+        }
+
+        .about-title,
+        .about-promise-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 25px 0;
+        }
+
+        .about-text p,
+        .about-promise-text {
+            font-weight: bold;
+            line-height: 1.7;
+        }
+
+        /* FLOATING BUTTONS FIXED */
+        .float-btn {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 2000;
+            transition: transform 0.2s ease;
+            text-decoration: none;
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .float-btn i {
+            font-size: 22px;
+        }
+
+        .email { left: 20px; bottom: 20px; background: #c1440e; }
+        .whatsapp { right: 80px; bottom: 20px; background: #25D366; }
+        .telegram { right: 20px; bottom: 20px; background: #0088cc; }
+
+        /* MOBILE FIXES */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 10px 15px;
+            }
+
+            nav ul {
+                gap: 12px;
+                font-size: 0.85rem;
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .slider {
+                height: 320px;
+            }
+
+            .slide {
+                flex: 0 0 80%;
+                height: 260px;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="logo"><strong>Dough Drop & Co.</strong></div>
+
+        <ul>
+            <li><a href="palette.html">Palette</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="basket.html">Your Basket</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="slider">
+    <button class="prev">&#10094;</button>
+
+    <div class="track">
+        <div class="slide"><img src="images/muffinslider.jpg"></div>
+        <div class="slide"><img src="images/cinnabunslider.jpg"></div>
+        <div class="slide"><img src="images/cakeslider.jpg"></div>
+        <div class="slide"><img src="images/breadrollslider.jpg"></div>
+        <div class="slide"><img src="images/doughnutslider.jpg"></div>
+        <div class="slide"><img src="images/breadyslider.jpg"></div>
+    </div>
+
+    <button class="next">&#10095;</button>
+</div>
+
+<section class="welcome">
+    <p class="tagline">
+        Fancy banana pumpkin loafyness! Or do you crave a very large drippy cinnabun?
+    </p>
+
+    <p class="closing">
+        Dough Drop & Co. has got you locked and loaded. 😉
+    </p>
+</section>
+
+<section class="about" id="about">
+    <p class="about-title">About Us:</p>
+
+    <div class="about-text">
+        <p>“An online confectioner’s,” some say, but you know we are more than that.</p>
+        <p>We are a tight-knit group of individuals and we've got one mission: to make life sweeter for the sweet-toothed.</p>
+        <p>We are for those who crave convenience without compromising on taste.</p>
+    </div>
+
+    <p class="about-promise-title">Our Promise</p>
+    <p class="about-promise-text">100% freshness guaranteed as scheduled.</p>
+</section>
+
+<!-- FLOATING BUTTONS -->
+<a href="mailto:ojwatsusi@gmail.com" class="float-btn email">
+    <i class="fa-solid fa-envelope"></i>
+</a>
+
+<a href="https://wa.me/256782813332" class="float-btn whatsapp" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<a href="https://t.me/remmi_og" class="float-btn telegram" target="_blank">
+    <i class="fa-brands fa-telegram"></i>
+</a>
+
+<script>
+const track = document.querySelector('.track');
+let slides = Array.from(document.querySelectorAll('.slide'));
+
+const firstClone = slides[0].cloneNode(true);
+const lastClone = slides[slides.length - 1].cloneNode(true);
+
+track.appendChild(firstClone);
+track.insertBefore(lastClone, slides[0]);
+
+slides = Array.from(document.querySelectorAll('.slide'));
+
+let index = 1;
+
+function updateCarousel(animate = true) {
+    const slideWidth = slides[0].offsetWidth + 20;
+    const containerWidth = document.querySelector('.slider').offsetWidth;
+
+    const offset = -(index * slideWidth) + (containerWidth / 2) - (slideWidth / 2);
+
+    track.style.transition = animate ? "0.6s ease" : "none";
+    track.style.transform = `translateX(${offset}px)`;
+
+    slides.forEach((s, i) => {
+        s.classList.toggle('active', i === index);
+    });
+}
+
+function nextSlide() {
+    index++;
+    updateCarousel();
+
+    if (index === slides.length - 1) {
+        setTimeout(() => {
+            index = 1;
+            updateCarousel(false);
+        }, 600);
+    }
+}
+
+function prevSlide() {
+    index--;
+    updateCarousel();
+
+    if (index === 0) {
+        setTimeout(() => {
+            index = slides.length - 2;
+            updateCarousel(false);
+        }, 600);
+    }
+}
+
+document.querySelector('.next').addEventListener('click', nextSlide);
+document.querySelector('.prev').addEventListener('click', prevSlide);
+
+setInterval(nextSlide, 4000);
+window.addEventListener('resize', () => updateCarousel(false));
+
+updateCarousel(false);
+</script>
+
+</body>
+</html>
