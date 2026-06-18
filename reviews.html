@@ -25,14 +25,49 @@
             z-index: -1;
         }
 
-        /* NAV */
+        /* NAV (UPDATED) */
         nav {
-            background: sienna;
-            padding: 15px;
-            text-align: center;
+            width: 100%;
+            background-color: sienna;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            height: 80px;
+        }
+
+        .logo {
+            color: white;
             font-weight: bold;
         }
 
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* PAGE LAYOUT */
         .container {
             max-width: 900px;
             margin: 40px auto;
@@ -95,6 +130,18 @@
 
         /* MOBILE */
         @media (max-width: 600px) {
+            .nav-container {
+                padding: 10px 15px;
+                flex-wrap: wrap;
+                height: auto;
+            }
+
+            nav ul {
+                gap: 10px;
+                font-size: 0.85rem;
+                flex-wrap: wrap;
+            }
+
             .container {
                 padding: 10px;
             }
@@ -104,8 +151,19 @@
 
 <body>
 
+<!-- NEW NAVBAR -->
 <nav>
-    Dough Drop & Co.
+    <div class="nav-container">
+        <div class="logo">Dough Drop & Co.</div>
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="palette.html">Palette</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="basket.html">Your Basket</a></li>
+        </ul>
+    </div>
 </nav>
 
 <div class="container">
